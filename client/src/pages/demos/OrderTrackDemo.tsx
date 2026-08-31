@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight, Check, RotateCcw, Search, Truck } from "lucide-react";
 import DemoShell from "./DemoShell";
+import DesignPreview from "@/components/DesignPreview";
 import { formatINR } from "@/lib/costing";
 import { allOrders, findOrder, progressFor, resetDemoOrders, type DemoOrder } from "@/lib/orders";
 
@@ -70,6 +71,13 @@ export default function OrderTrackDemo() {
             <div>
               <p className="micro-label"><span /> {found.ref} · {found.channel === "shop" ? "launch shop order" : found.channel === "custom-quote" ? "custom brief" : "studio demo record"}</p>
               <h3>{found.items.map((item) => `${item.quantity}× ${item.name}`).join(", ")}</h3>
+              {found.items.some((item) => item.design) && (
+                <div className="track-designs">
+                  {found.items.filter((item) => item.design).map((item, index) => (
+                    <div className="cart-thumb design" key={index}><DesignPreview design={item.design!} /></div>
+                  ))}
+                </div>
+              )}
               {found.items.some((item) => item.personalization) && (
                 <p className="track-personalization">{found.items.filter((item) => item.personalization).map((item) => `“${item.personalization}”`).join(" ")}</p>
               )}

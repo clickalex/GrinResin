@@ -24,6 +24,7 @@ import CatalogueDemo from "./pages/demos/CatalogueDemo";
 import PricingDemo from "./pages/demos/PricingDemo";
 import OrderBuilderDemo from "./pages/demos/OrderBuilderDemo";
 import OrderTrackDemo from "./pages/demos/OrderTrackDemo";
+import LeadDeskDemo from "./pages/demos/LeadDeskDemo";
 import Shop from "./pages/store/Shop";
 import ProductPage from "./pages/store/ProductPage";
 import DesignStudio from "./pages/store/DesignStudio";
@@ -85,6 +86,7 @@ function Router() {
         <Route path="/demos/pricing" component={PricingDemo} />
         <Route path="/demos/order" component={OrderBuilderDemo} />
         <Route path="/demos/track" component={OrderTrackDemo} />
+        <Route path="/demos/desk" component={LeadDeskDemo} />
 
         {/* Store — shop, design-your-own, cart, checkout, orders */}
         <Route path="/shop" component={Shop} />

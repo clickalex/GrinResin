@@ -4,14 +4,11 @@
  * Single source of truth for the 150-product opportunity catalogue.
  * Emits:
  *   1. client/src/data/products.ts                      (typed module for the UI)
- *   2. client/public/manus-storage/grinrex-resin-source-data_dd7cd205.json (downloadable source data)
- *   3. client/public/manus-storage/grinrex-resin-full-product-catalogue_016c7d4b.md (document library reference)
  */
-import { mkdirSync, writeFileSync } from "node:fs";
+import { writeFileSync } from "node:fs";
 import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
-const PUB = path.join(ROOT, "client/public/manus-storage");
 const DATA = path.join(ROOT, "client/src/data");
 mkdirSync(PUB, { recursive: true });
 mkdirSync(DATA, { recursive: true });
@@ -281,153 +278,4 @@ export const launchEditProducts = catalogue.filter((product) => product.launch);
 `;
 writeFileSync(path.join(ROOT, "client/src/data/products.ts"), ts);
 
-// ---------------------------------------------------------------------------
-// 2. Structured source data document (downloadable from the document library)
-// ---------------------------------------------------------------------------
-const sourceData = {
-  meta: {
-    brand: "GrinRex Resin",
-    document: "Complete planning source data",
-    version: "2026.08",
-    status: "planning reference — figures are source ranges, not supplier quotations",
-  },
-  business: {
-    model: "Home-based studio, direct-to-consumer personalised resin gifting",
-    market: "India",
-    channels: ["Instagram", "WhatsApp Business", "local exhibitions", "gift shops", "online marketplaces", "owned website"],
-    positioning: "Affordable-to-premium customized handmade resin gifts",
-    differentiation: "Personalization and finish discipline, not catalogue size or lowest price",
-    startup: {
-      total_range_inr: [10000, 14000],
-      tools_range_inr: [6000, 8000],
-      materials_range_inr: [4000, 6000],
-      later_stage_tools: ["pressure_pot", "rotary_tool", "polishing_machine"],
-    },
-  },
-  revenue_streams: [
-    { stage: "launch", stream: "Direct product sales" },
-    { stage: "launch", stream: "Personalization surcharge" },
-    { stage: "expansion", stream: "Gift combos & bundles" },
-    { stage: "expansion", stream: "Wedding & bulk occasion orders" },
-    { stage: "expansion", stream: "Corporate gifting" },
-    { stage: "expansion", stream: "DIY kits" },
-    { stage: "expansion", stream: "Workshops" },
-    { stage: "expansion", stream: "Selected wholesale" },
-  ],
-  core_materials: [
-    "epoxy_resin", "hardener", "mica_powder", "pigment_paste", "alcohol_ink", "gold_foil",
-    "dried_flowers", "fine_glitter", "resin_dye", "glass_beads", "vinyl_letters",
-    "keychain_rings", "earring_hooks", "pendant_bails", "neodymium_magnets", "adhesive_backing",
-    "packaging_box", "bubble_wrap", "tissue_paper", "satin_ribbon",
-  ],
-  core_tools: T.basic.concat([T.molds, T.sand, T.polish, T.drill, T.pliers, "beakers", "silicone_mats", "protective_storage"]),
-  safety: [
-    "Read and follow resin manufacturer instructions and SDS guidance",
-    "Wear nitrile gloves and a suitable respirator mask; ensure cross-ventilation",
-    "Restrict workspace access from children and pets",
-    "No food-contact or heat-use claims unless the full material-and-design system is verified",
-    "Store pigments, inks, and mixed resin away from living spaces",
-  ],
-  product_catalog: {
-    count: products.length,
-    families: Object.keys(families),
-    launch_edit_size: launchCount,
-    products,
-  },
-  costing: {
-    components: [
-      "resin_and_hardener", "pigments_and_inclusions", "hardware_and_packaging",
-      "tool_amortization", "labor_and_electricity", "wastage_fees_and_shipping",
-    ],
-    category_material_ranges_inr: bands,
-    formula: "material + labor + packaging + overhead + fees + profit",
-    guardrail: "Recompute per SKU after supplier quotations; review pricing monthly",
-  },
-  production: {
-    steps: [
-      "design_concept", "mold_selection", "workspace_preparation", "measuring_resin_and_hardener",
-      "mixing", "adding_pigments_or_inclusions", "pouring", "bubble_removal", "curing",
-      "demolding", "trimming_and_sanding", "drilling_or_assembly", "polishing_and_hardware",
-      "quality_inspection", "protective_packaging", "storage_or_dispatch",
-    ],
-    quality_checks: [
-      "full_cure", "surface_smoothness", "bubble_level", "cracks", "dimensions",
-      "personalization_accuracy", "hardware_security", "edge_safety", "packaging_protection",
-    ],
-  },
-  swot: {
-    strengths: ["Low setup cost", "Personalization depth", "Broad gifting demand", "Online + offline routes"],
-    weaknesses: ["Cure-time dependent throughput", "Sensitive to temperature and humidity", "Finishing skill required", "Limited early capacity"],
-    opportunities: ["Wedding and corporate gifting", "Social commerce", "Workshops and DIY kits", "Niche collections (pet, gaming, botanical)"],
-    threats: ["Low-cost competition", "Material price volatility", "Copycat listings", "Shipping damage", "Rising compliance expectations"],
-  },
-  marketing: [
-    "product_photography", "making_reels", "customization_stories", "packaging_videos",
-    "festival_collections", "behind_the_scenes", "educational_content",
-  ],
-  roadmap: [
-    { phase: "01", title: "Starter setup", detail: "Essential tools, safe workspace, restricted palette, multipurpose molds, sample testing" },
-    { phase: "02", title: "MVP catalogue", detail: "Launch 10–12 items, consistent photography, cost every SKU, open direct sales" },
-    { phase: "03", title: "Customization system", detail: "Proof approvals for names, photos, flowers, wedding details, sentimental pieces" },
-    { phase: "04", title: "Controlled expansion", detail: "Grow toward 50 demand-validated products, bundles, premium editions, seasonal drops" },
-    { phase: "05", title: "Business development", detail: "Selected wholesale, corporate gifting, repeat-customer programs, marketplace tests" },
-    { phase: "06", title: "Scale with proof", detail: "SOPs, bulk buying, dedicated workstations, stronger QC, B2B capacity" },
-  ],
-  metrics: [
-    "material_cost_per_product", "labor_time_and_cost", "packaging_fees_damage_rate",
-    "wastage_percentage", "gross_and_net_contribution", "order_volume_and_aov",
-    "repeat_or_referral_demand", "customer_acquisition_cost",
-  ],
-  expansion_lanes: [
-    "Jewelry brand", "Home décor", "Wedding collection", "Corporate gifting", "Pet memorials",
-    "Gaming collection", "DIY kits", "Workshops", "Wholesale", "Custom molds",
-    "Supplies store", "Design marketplace",
-  ],
-};
-writeFileSync(path.join(PUB, "grinrex-resin-source-data_dd7cd205.json"), JSON.stringify(sourceData, null, 2));
-
-// ---------------------------------------------------------------------------
-// 3. Full catalogue markdown document
-// ---------------------------------------------------------------------------
-let md = `# GrinRex Resin — Full Product Catalogue (150-product opportunity library)
-
-> Status: planning reference. This is an expansion library, not an immediate product promise.
-> The launch strategy starts with a narrowed 10–12 product edit; every SKU is first tested
-> for safety, unit cost, production time, quality, demand, packaging, and dispatch risk.
-> Material ranges below are source planning ranges (₹) for raw materials only — not supplier quotations.
-
-**Pricing formula:** material + labor + packaging + overhead + fees + profit
-
-| Scale band | Source material range (₹) |
-| --- | --- |
-`;
-for (const [scale, [lo, hi]] of Object.entries(bands)) {
-  md += `| ${scale[0].toUpperCase()}${scale.slice(1)} | ₹${lo}–₹${hi}${scale === "premium" ? "+" : ""} |\n`;
-}
-let counter = 0;
-for (const [family, rows] of Object.entries(families)) {
-  counter += rows.length;
-  md += `\n## ${family} (${rows.length} ideas — running total ${counter})\n\n`;
-  md += `| # | Product | Scale | Launch edit | Note |\n| --- | --- | --- | --- | --- |\n`;
-  for (const row of rows) {
-    const p = products.find((x) => x.name === row[0]);
-    md += `| ${String(p.id).padStart(3, "0")} | ${p.name} | ${p.scale} | ${p.launch ? "✓" : "—"} | ${p.note} |\n`;
-  }
-}
-md += `
-## Product material + tool detail (all 150)
-
-`;
-for (const p of products) {
-  const clean = (t) => t.replaceAll("_", " ");
-  md += `### ${String(p.id).padStart(3, "0")} · ${p.name}\n`;
-  md += `- Family: ${p.family}\n- Scale: ${p.scale} (material band ₹${p.material_range[0]}–₹${p.material_range[1]}${p.scale === "premium" ? "+" : ""})\n`;
-  md += `- Materials: ${p.materials.map(clean).join(", ")}\n- Tools: ${p.tools.map(clean).join(", ")}\n`;
-  md += `- Status: ${p.launch ? "Recommended launch edit item" : "Opportunity library item"}\n\n`;
-}
-md += `---\n_Generated by scripts/build-catalogue.mjs. Verify all figures before commercial use._\n`;
-writeFileSync(path.join(PUB, "grinrex-resin-full-product-catalogue_016c7d4b.md"), md);
-
 console.log("Wrote: client/src/data/products.ts");
-console.log("Wrote: client/public/manus-storage/grinrex-resin-source-data_dd7cd205.json");
-console.log("Wrote: client/public/manus-storage/grinrex-resin-full-product-catalogue_016c7d4b.md");

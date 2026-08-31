@@ -3,11 +3,11 @@
  */
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowRight, ShoppingBag, Trash2 } from "lucide-react";
+import { ArrowRight, Copy, ShoppingBag, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import StorePage from "@/components/StorePage";
 import DesignPreview from "@/components/DesignPreview";
-import { deleteDesign, designQuote, readDesigns, type Design } from "@/lib/design";
+import { deleteDesign, designQuote, readDesigns, saveDesign, uid, type Design } from "@/lib/design";
 import { formatINR } from "@/lib/costing";
 import { useCart } from "@/lib/cart";
 
@@ -56,6 +56,7 @@ export default function MyDesigns() {
                     toast.success("Added to cart", { description: `${design.quantity} × ${formatINR(quote.roundedPrice)}` });
                   }}><ShoppingBag size={14} /> Order</button>
                   <Link href={`/studio?design=${design.id}`}>Edit</Link>
+                  <button onClick={() => { const copy = { ...design, id: uid(), name: `${design.name} copy`, createdAt: new Date().toISOString() }; setDesigns(saveDesign(copy)); toast("Duplicated — edit the copy freely"); }} aria-label="Duplicate design"><Copy size={14} /></button>
                   <button className="danger" onClick={() => { setDesigns(deleteDesign(design.id)); toast("Design removed"); }} aria-label="Delete design"><Trash2 size={14} /></button>
                 </div>
               </article>

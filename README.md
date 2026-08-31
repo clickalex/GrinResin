@@ -32,7 +32,7 @@ pnpm start       # production: express serves dist/public (SPA fallback included
 | `/chapters/roadmap` | 10 · Roadmap | Six phases from setup to scale |
 | `/chapters/playbook` | 11 · Playbook | Metrics, order workflow, evidence cards |
 | `/chapters/investor` | 12 · Investor case | Staged capital logic, expansion lanes |
-| `/documents` | 13 · Library | Every source doc, readable in-site + downloadable |
+| `/documents` | 13 · PRD | One page of product requirements — the whole scope, readable in-site + downloadable |
 
 ## Storefront (`/shop`)
 
@@ -55,7 +55,8 @@ Everything is browser-local and nothing is ever charged — but the flows are re
 - **Storefront** — the launch shop graduated to `/shop`: real cart, checkout, custom design studio, and order tracking.
 - **Pricing guardrail** `/demos/pricing` — the source formula live (material + labor + packaging + overhead + fees + profit), per-SKU presets, contribution breakdown. Accepts `?p=<id>` from any product.
 - **Custom order builder** `/demos/order` — validated enquiry (zod + react-hook-form), live quote sheet, downloadable `.txt`, saves a trackable order.
-- **Order tracker** `/demos/track` — eight studio states over the 16-step process; reads seeded refs (`GRX-1001…1004`) plus orders created in the storefront and builder (localStorage, resettable).
+- **Order tracker** `/demos/track` — eight studio states over the 16-step process; reads seeded refs (`GRX-1001…1004`) plus orders created in the storefront and builder (localStorage, resettable), including design thumbnails for store orders.
+- **Studio desk** `/demos/desk` — the owner-side view of the lead store: wedding/corporate/workshop/contact enquiries with counts, reply-status cycling, and removal. Seedable with sample enquiries.
 
 No backend is required: demo orders live in `localStorage`; all data ships from `client/public/manus-storage/`.
 
@@ -68,7 +69,7 @@ client/            React app (wouter routes, shadcn/ui primitives, index.css des
   src/pages/       chapters/ + store/ + info/ + demos/ + Home/Documents/NotFound
   public/manus-storage/  source JSON, markdown documents, brand imagery
 server/            express static host with SPA fallback (production)
-scripts/           build-catalogue.mjs — regenerates products.ts, source JSON, catalogue md
+scripts/           build-catalogue.mjs — regenerates the typed catalogue (products.ts)
 ```
 
 Regenerate the catalogue after editing `scripts/build-catalogue.mjs`:
@@ -81,4 +82,4 @@ node scripts/build-catalogue.mjs
 
 - Product/photography images in `client/public/manus-storage/` are AI-generated placeholders for the demo; replace with real studio photography before launch.
 - All ₹ figures are source planning ranges, not supplier quotations; nothing in the demos is charged, stored remotely, or sent anywhere.
-- The repository also preserves `grinrex-resin-presentation.zip` — the original single-page Manus export this build was expanded from.
+- Scope lives in one place: `client/public/manus-storage/grinrex-prd.md` (rendered at `/documents`). The earlier source documents, planning data, and the original single-page export archive were retired.

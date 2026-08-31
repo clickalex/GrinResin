@@ -1136,3 +1136,36 @@ h2 { margin-bottom: 0; color: var(--chalk); font-size: clamp(3rem, 5.2vw, 5.8rem
   .product-specs { grid-template-columns: 1fr; }
   .lot-table td:first-child { white-space: normal; }
 }
+
+/* --- studio desk demo (leads) + track design thumbs --- */
+.track-designs { display: flex; gap: 8px; margin-top: 12px; }
+.track-designs .cart-thumb { width: 64px; height: 64px; }
+.desk-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 22px 0 16px; }
+.desk-cell { background: #141513; padding: 16px 18px; }
+.desk-cell span { display: block; color: var(--muted); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; }
+.desk-cell b { display: block; color: var(--amber-light); font-family: "Cormorant Garamond", serif; font-size: 34px; line-height: 1.1; }
+.desk-cell p { margin: 2px 0 0; color: var(--sage); font-size: 12px; }
+.desk-toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.desk-toolbar p { margin: 0; color: var(--muted); font-size: 12.5px; display: flex; align-items: center; gap: 7px; }
+.desk-toolbar p b { color: var(--amber-light); }
+.desk-toolbar > div { display: flex; align-items: center; gap: 14px; }
+.desk-toolbar button.text-button { background: none; border: 0; color: var(--sage); cursor: pointer; font-size: 12.5px; display: inline-flex; align-items: center; gap: 6px; }
+.desk-toolbar .amber-button { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; font-size: 12px; }
+.desk-list { border: 1px solid var(--line); background: #141513; }
+.desk-row + .desk-row { border-top: 1px solid var(--line); }
+.desk-row { display: grid; grid-template-columns: 150px 1fr auto; gap: 16px; align-items: center; padding: 14px 16px; }
+.desk-ref b { display: block; color: var(--chalk); font-size: 13px; letter-spacing: .06em; }
+.desk-kind { display: inline-block; margin-top: 5px; padding: 2px 8px; border: 1px solid var(--line); border-radius: 999px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--sage); }
+.desk-kind.wedding { color: #e3a0b0; border-color: rgba(227,160,176,.4); }
+.desk-kind.corporate { color: #9fc2e0; border-color: rgba(159,194,224,.4); }
+.desk-kind.workshop { color: var(--amber-light); border-color: rgba(242,189,105,.45); }
+.desk-copy strong { color: var(--chalk); font-size: 13.5px; }
+.desk-copy strong em { color: var(--muted); font-style: normal; font-size: 12px; }
+.desk-copy p { margin: 3px 0 0; color: var(--sage); font-size: 12.5px; }
+.desk-date { color: var(--muted); font-size: 11px; }
+.desk-tools { display: flex; align-items: center; gap: 10px; }
+.desk-status { background: none; border: 1px solid rgba(242,189,105,.5); color: var(--amber-light); border-radius: 999px; padding: 4px 11px; font-size: 11px; cursor: pointer; letter-spacing: .04em; }
+.desk-status.done { border-color: rgba(143,168,124,.55); color: var(--sage); }
+.desk-empty { border: 1px dashed var(--line); padding: 26px; color: var(--muted); font-size: 13px; text-align: center; }
+.desk-empty p { margin: 0; max-width: 560px; }
+@media (max-width: 860px) { .desk-grid { grid-template-columns: repeat(2, 1fr); } .desk-row { grid-template-columns: 1fr; gap: 8px; } }

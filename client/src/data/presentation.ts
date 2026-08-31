@@ -115,10 +115,10 @@ export const chapters: ChapterRoute[] = [
   },
   {
     number: "13",
-    rail: "Documents",
-    label: "The document library",
+    rail: "The PRD",
+    label: "One page of requirements",
     path: "/documents",
-    blurb: "Every source document, in reading order.",
+    blurb: "The product, stated once — scope, rules, and what the demo leaves out.",
   },
 ];
 
@@ -134,70 +134,14 @@ export type DocumentEntry = {
 
 export const documents: DocumentEntry[] = [
   {
-    id: "overview",
+    id: "prd",
     number: "01",
-    eyebrow: "Business overview",
-    title: "The GrinRex Resin proposition",
-    file: "grinrex-resin-business-overview_81d6cfea.md",
+    eyebrow: "Product requirements · one page",
+    title: "GrinRex Resin — the demo, stated once",
+    file: "grinrex-prd.md",
     summary: [
-      "GrinRex Resin is a personalized handmade gifting and keepsake brand for the Indian market, transforming names, photographs, flowers, dates, and occasions into durable resin pieces.",
-      "The source plan calls for a controlled 10–20 product launch through Instagram, WhatsApp Business, local exhibitions, gift shops, and online marketplaces.",
-      "Customization — not catalogue size or lowest-price positioning — is the core differentiation.",
-    ],
-  },
-  {
-    id: "studio",
-    number: "02",
-    eyebrow: "Studio & business source reference",
-    title: "The full studio foundation",
-    file: "grinrex-resin-studio-source-reference_5fb89717.md",
-    summary: [
-      "The complete business basis: market, model, launch channels, revenue streams, source-plan startup ranges, tools, materials, pricing framework, production process, quality checks, safety requirements, SWOT, marketing, roadmap, metrics, and expansion lanes.",
-      "All figures remain planning inputs that require supplier quotations, product-level costing, and compliance review before commercial use.",
-    ],
-  },
-  {
-    id: "catalogue",
-    number: "03",
-    eyebrow: "Full product catalogue",
-    title: "The 150-product opportunity library",
-    file: "grinrex-resin-full-product-catalogue_016c7d4b.md",
-    summary: [
-      "The complete list spans jewelry, keepsakes, home and living, office and corporate pieces, wedding and festival items, gaming and hobby objects, garden goods, pet memorials, and art-led pieces.",
-      "It is an expansion library, not an immediate product promise — the launch still starts with a narrowed edit tested for safety, cost, time, demand, and dispatch risk.",
-    ],
-  },
-  {
-    id: "operations",
-    number: "04",
-    eyebrow: "Roadmap & internal operations",
-    title: "The route from studio to system",
-    file: "grinrex-resin-roadmap-and-operations_12f62ffc.md",
-    summary: [
-      "Initial setup is estimated at ₹10,000–₹14,000: roughly ₹6,000–₹8,000 for essential tools and ₹4,000–₹6,000 for raw materials. Planning ranges, not quotations.",
-      "Every SKU records materials, labor, packaging, tool amortization, wastage, fees, margin, order volume, and quality outcome.",
-    ],
-  },
-  {
-    id: "investor",
-    number: "05",
-    eyebrow: "Investor brief",
-    title: "A measured case for growth",
-    file: "grinrex-resin-investor-brief_e402735d.md",
-    summary: [
-      "Designed to grow from a disciplined direct-to-consumer collection into a broader gifting and lifestyle platform.",
-      "No unverified market-size, revenue, valuation, or return claims — growth materials must add verified sales history and product-level margin first.",
-    ],
-  },
-  {
-    id: "data",
-    number: "06",
-    eyebrow: "Source data",
-    title: "The original planning data",
-    file: "grinrex-resin-source-data_dd7cd205.json",
-    summary: [
-      "The structured source behind the startup ranges, catalogue, costing, process, quality, safety, SWOT, marketing, roadmap, and metric references in this presentation.",
-      "Retained as a planning document — supplement it with verified supplier pricing and live sales data as the business develops.",
+      "What this site is: a thirteen-chapter pitch reel with a working storefront attached — design studio, guardrail-priced cart and checkout, demo order tracking, and an enquiry desk. Everything runs browser-local; nothing is ever charged.",
+      "The old source documents, planning data, and the single-page export archive were retired so that one page states the scope instead.",
     ],
   },
 ];

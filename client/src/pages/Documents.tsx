@@ -38,13 +38,13 @@ export default function Documents() {
 
   return (
     <>
-      <ChapterPage number="13" label="The document library" className="library-section">
+      <ChapterPage number="13" label="One page of requirements" className="library-section">
         <div className="library-title reveal">
           <div>
-            <p className="micro-label">Everything, in sequence</p>
-            <h2>The story. The route.<br /><em>The working documents.</em></h2>
+            <p className="micro-label">One page. No shelf needed</p>
+            <h2>The story. The proof.<br /><em>One page of requirements.</em></h2>
           </div>
-          <p>Each document continues the presentation in the order it was introduced. Read within the site, download the working reference, or inspect the original structured source data.</p>
+          <p>The working documents were retired in favour of a single PRD: what the demo covers, the rules its flows obey, and what it deliberately leaves out. Read it here, or download the page.</p>
         </div>
         <div className="document-library">
           {documents.map((item) => (

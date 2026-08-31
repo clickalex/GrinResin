@@ -2,7 +2,7 @@
  * The demo bench — every interactive tool that backs a chapter of the presentation.
  */
 import { Link } from "wouter";
-import { ArrowRight, Database, Package, ScrollText, SlidersHorizontal, Sparkles, Truck } from "lucide-react";
+import { ArrowRight, Database, Inbox, Package, ScrollText, SlidersHorizontal, Sparkles, Truck } from "lucide-react";
 import { SectionMarker } from "@/components/ChapterPage";
 
 const demos = [
@@ -11,6 +11,7 @@ const demos = [
   { icon: ScrollText, path: "/demos/pricing", title: "Pricing guardrail", chapter: "Ch. 07", detail: "Move every cost component and watch the selling price, fee, and contribution recompute live." },
   { icon: Sparkles, path: "/demos/order", title: "Custom order builder", chapter: "Ch. 11", detail: "Configure a personalised piece, validate the enquiry form, and produce a studio-ready quote sheet." },
   { icon: Truck, path: "/demos/track", title: "Order tracker", chapter: "Ch. 08", detail: "Enter any demo reference — or one you created — and watch it move through the eight studio states." },
+  { icon: Inbox, path: "/demos/desk", title: "Studio desk", chapter: "Ch. 13", detail: "Wedding, corporate, workshop, and contact enquiries as the studio sees them — count, reply-status cycling, removal. All browser-local." },
 ];
 
 export default function DemosIndex() {

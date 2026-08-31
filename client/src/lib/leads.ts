@@ -48,3 +48,13 @@ export function dropLead(ref: string): Lead[] {
   }
   return next;
 }
+
+export function setLeadStatus(ref: string, status: Lead["status"]): Lead[] {
+  const next = readLeads().map((lead) => (lead.ref === ref ? { ...lead, status } : lead));
+  try {
+    localStorage.setItem(KEY, JSON.stringify(next));
+  } catch {
+    /* demo store */
+  }
+  return next;
+}
