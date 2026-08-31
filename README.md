@@ -1,9 +1,9 @@
 # GrinRex Resin — presentation site & working demos
 
 A personalized resin gifting and keepsake brand: the full "Lacquered Portfolio"
-presentation (13 chapters, one page each) plus a bench of working demo tools that
-prove the operating story — catalogue, pricing guardrail, shop, custom-order flow,
-and order tracking.
+presentation (13 chapters, one page each), a working storefront where customers
+design their own resin piece and order it, and a bench of demo tools that prove
+the operating story — catalogue, pricing guardrail, custom-order flow, tracking.
 
 ## Quick start
 
@@ -34,13 +34,28 @@ pnpm start       # production: express serves dist/public (SPA fallback included
 | `/chapters/investor` | 12 · Investor case | Staged capital logic, expansion lanes |
 | `/documents` | 13 · Library | Every source doc, readable in-site + downloadable |
 
+## Storefront (`/shop`)
+
+Everything is browser-local and nothing is ever charged — but the flows are real
+(validated forms, live pricing through the same guardrail, persistent state).
+
+| Route | What it holds |
+| --- | --- |
+| `/shop` | Storefront over the launch edit — search, family filter, sort, launch-only toggle |
+| `/product/:id` | Product detail: spec sheet, live "what it costs to make" card, add-to-cart with cast-text option |
+| `/studio` | **Design your own piece** — shape, size, effect, palette, draggable inclusions, cast text, finish, packaging, rush; priced live |
+| `/designs` | Saved designs (localStorage) — re-open, duplicate, add to cart |
+| `/cart` → `/checkout` | Cart with quantity edits; validated checkout (zod) that saves a trackable order with full design snapshots |
+| `/orders`, `/order/:ref` | Order list and a single order: 8-stage studio timeline, receipt download |
+| `/about` `/weddings` `/corporate` `/workshops` `/faq` `/care` `/contact` | Info pages — wedding and corporate enquiry forms and workshop seat booking run through a local lead store |
+
 ## Working demos (`/demos`)
 
 - **Catalogue browser** `/demos/catalogue` — real 150-item data: search, family filters, sort, launch toggle, specimen sheets, "cost this piece" handoff.
-- **Launch shop** `/demos/shop` — storefront over the 12 launch products: personalization, cart, checkout → creates a trackable demo order.
+- **Storefront** — the launch shop graduated to `/shop`: real cart, checkout, custom design studio, and order tracking.
 - **Pricing guardrail** `/demos/pricing` — the source formula live (material + labor + packaging + overhead + fees + profit), per-SKU presets, contribution breakdown. Accepts `?p=<id>` from any product.
 - **Custom order builder** `/demos/order` — validated enquiry (zod + react-hook-form), live quote sheet, downloadable `.txt`, saves a trackable order.
-- **Order tracker** `/demos/track` — eight studio states over the 16-step process; reads seeded refs (`GRX-1001…1004`) plus orders created in the shop/builder (localStorage, resettable).
+- **Order tracker** `/demos/track` — eight studio states over the 16-step process; reads seeded refs (`GRX-1001…1004`) plus orders created in the storefront and builder (localStorage, resettable).
 
 No backend is required: demo orders live in `localStorage`; all data ships from `client/public/manus-storage/`.
 
@@ -49,8 +64,8 @@ No backend is required: demo orders live in `localStorage`; all data ships from 
 ```
 client/            React app (wouter routes, shadcn/ui primitives, index.css design system)
   src/data/        presentation.ts · products.ts (generated)
-  src/lib/         costing.ts (guardrail engine) · orders.ts (demo store)
-  src/pages/       chapters/ + demos/ + Home/Documents/NotFound
+  src/lib/         costing.ts (guardrail) · design.ts (studio model+pricing) · cart.tsx · orders.ts · leads.ts
+  src/pages/       chapters/ + store/ + info/ + demos/ + Home/Documents/NotFound
   public/manus-storage/  source JSON, markdown documents, brand imagery
 server/            express static host with SPA fallback (production)
 scripts/           build-catalogue.mjs — regenerates products.ts, source JSON, catalogue md

@@ -31,3 +31,13 @@
 - [x] Add working demo pages: catalogue browser, launch shop, pricing guardrail, custom order builder, order tracker.
 - [x] Local-source the Manus storage dependency (JSON, documents, and imagery now ship in client/public/manus-storage).
 - [x] Type-check, unit-test, and production-build the restructured project.
+
+## Storefront & Design Studio (2026-09-01)
+
+- [x] `/shop` storefront over the launch edit with search, family filter, sort; `/product/:id` detail pages with live cost cards.
+- [x] `/studio` custom design tool: shape, size, effect, palette, draggable inclusions, cast text, finish, packaging, rush — priced live through the pricing guardrail (`designQuote`).
+- [x] Saved designs (`/designs`, localStorage), cart (`/cart`) and validated checkout (`/checkout`) that snapshot each design into the order.
+- [x] Order tracking for store orders: `/orders` list, `/order/:ref` receipt + 8-stage timeline; shared store with `/demos/track`.
+- [x] Info pages: About, Weddings, Corporate, Workshops (seat booking via lead store), FAQ, Care, Contact.
+- [x] Fixed `orderTotal` semantics in the guardrail (customer total vs. contribution split), extended unit tests to 13.
+- [x] Removed `/demos/shop` (superseded by `/shop`); rail badge shows live cart count.

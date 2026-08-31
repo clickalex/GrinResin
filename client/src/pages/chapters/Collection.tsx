@@ -46,7 +46,7 @@ export default function Collection() {
         </div>
         <div className="collection-next-links">
           <Link className="text-button" href="/chapters/catalogue">Browse the complete 150-product catalogue <ArrowRight size={16} /></Link>
-          <Link className="text-button" href="/demos/shop">Try the launch collection in the shop demo <ArrowRight size={16} /></Link>
+          <Link className="text-button" href="/shop">Order the launch collection in the shop <ArrowRight size={16} /></Link>
         </div>
       </div>
     </ChapterPage>

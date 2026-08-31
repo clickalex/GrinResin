@@ -7,7 +7,7 @@ import { SectionMarker } from "@/components/ChapterPage";
 
 const demos = [
   { icon: SlidersHorizontal, path: "/demos/catalogue", title: "Catalogue browser", chapter: "Ch. 06", detail: "Search, filter, and inspect all 150 source products exactly as the idea library describes them." },
-  { icon: Package, path: "/demos/shop", title: "Launch shop", chapter: "Ch. 05", detail: "A working storefront demo: the 12-product launch edit, a real cart, and checkout that creates a demo order." },
+  { icon: Package, path: "/shop", title: "Launch shop → now live", chapter: "Ch. 05", detail: "The demo graduated: the 12-product edit, cart, and checkout now run as the real store flow — design-your-own included." },
   { icon: ScrollText, path: "/demos/pricing", title: "Pricing guardrail", chapter: "Ch. 07", detail: "Move every cost component and watch the selling price, fee, and contribution recompute live." },
   { icon: Sparkles, path: "/demos/order", title: "Custom order builder", chapter: "Ch. 11", detail: "Configure a personalised piece, validate the enquiry form, and produce a studio-ready quote sheet." },
   { icon: Truck, path: "/demos/track", title: "Order tracker", chapter: "Ch. 08", detail: "Enter any demo reference — or one you created — and watch it move through the eight studio states." },

@@ -43,7 +43,7 @@ export default function CatalogueDemo() {
       className="demo-catalogue"
       intro="All 150 source products · one browsable library"
       title={<>The whole range,<br /><em>open on the bench.</em></>}
-      next={{ href: "/demos/shop", label: "Buy from the launch edit" }}
+      next={{ href: "/shop", label: "Buy from the launch edit" }}
     >
       <div className="demo-controls reveal">
         <div className="demo-search">

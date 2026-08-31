@@ -4,14 +4,16 @@
  */
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, LayoutGrid, Menu, Palette, ShoppingBag, Tickets, X } from "lucide-react";
 import { chapterIndexForPath, chapters } from "@/data/presentation";
+import { useCart } from "@/lib/cart";
 
 const DEMO_PATH = "/demos";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [location] = useLocation();
+  const { count } = useCart();
   const activeIndex = chapterIndexForPath(location);
 
   useEffect(() => {
@@ -54,6 +56,12 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             <em>Working demos</em>
           </Link>
         </nav>
+        <div className="rail-store" aria-label="Store shortcuts">
+          <Link href="/shop" title="Shop"><LayoutGrid size={14} /></Link>
+          <Link href="/studio" title="Design your own"><Palette size={14} /></Link>
+          <Link href="/orders" title="My orders"><Tickets size={14} /></Link>
+          <Link href="/cart" title="Cart" className="rail-cart"><ShoppingBag size={14} />{count > 0 && <b>{count}</b>}</Link>
+        </div>
         <p className="rail-foot">A lasting object<br />for a fleeting moment.</p>
       </aside>
 

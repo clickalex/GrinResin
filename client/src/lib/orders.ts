@@ -5,6 +5,7 @@
  */
 import { hashString } from "./costing";
 import { trackerStages } from "@/data/presentation";
+import type { Design } from "@/lib/design";
 
 export type DemoOrderItem = {
   productId: number;
@@ -12,12 +13,15 @@ export type DemoOrderItem = {
   personalization?: string;
   quantity: number;
   unitPrice: number;
+  kind?: "product" | "design";
+  /** Snapshot of the customer's own design when the line came from the studio. */
+  design?: Design;
 };
 
 export type DemoOrder = {
   ref: string;
   placedAt: string; // ISO
-  channel: "shop" | "custom-quote" | "seed";
+  channel: "shop" | "custom-quote" | "seed" | "store";
   customer: string;
   city: string;
   notes?: string;

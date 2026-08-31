@@ -5,6 +5,7 @@
 import { describe, expect, it } from "vitest";
 import { catalogue, launchEditProducts } from "@/data/products";
 import { computeQuote, defaultQuoteInput, presetForProduct, hashString } from "@/lib/costing";
+import { designQuote, newDesign, type Design, type DesignSize } from "@/lib/design";
 
 describe("catalogue data", () => {
   it("carries exactly 150 products with unique ids and names", () => {
@@ -50,7 +51,8 @@ describe("pricing guardrail", () => {
     const wasteful = computeQuote({ ...defaultQuoteInput, wastagePercent: 20 });
     expect(wasteful.roundedPrice).toBeGreaterThan(base.roundedPrice);
     const bulk = computeQuote({ ...defaultQuoteInput, quantity: 10 });
-    expect(bulk.orderTotal).toBeCloseTo(bulk.netContribution * 10, 2);
+    expect(bulk.orderTotal).toBeCloseTo(bulk.roundedPrice * 10, 2);
+    expect(bulk.orderContribution).toBeCloseTo(bulk.netContribution * 10, 2);
   });
 
   it("produces stable, positive quotes for every catalogue product", () => {
@@ -64,5 +66,53 @@ describe("pricing guardrail", () => {
   it("hashString is deterministic", () => {
     expect(hashString("Botanical Drop Earrings")).toBe(hashString("Botanical Drop Earrings"));
     expect(hashString("a")).not.toBe(hashString("b"));
+  });
+});
+
+describe("design studio quote (custom pieces run through the same guardrail)", () => {
+  const unit = (d: Design) => designQuote(d).quote.roundedPrice;
+
+  it("prices a default design positively with real contribution", () => {
+    const { quote } = designQuote(newDesign());
+    expect(quote.roundedPrice).toBeGreaterThan(0);
+    expect(quote.netContribution).toBeGreaterThan(0);
+  });
+
+  it("keeps the …9 psychological ending across every size and effect", () => {
+    const sizes: DesignSize[] = ["S", "M", "L", "XL"];
+    for (const size of sizes) {
+      for (const effect of ["clear", "sunset", "marble", "galaxy", "ocean", "smoke"] as const) {
+        expect(unit({ ...newDesign(), size, effect }) % 10).toBe(9);
+      }
+    }
+  });
+
+  it("gets more expensive as the pour gets bigger", () => {
+    const sizes: DesignSize[] = ["S", "M", "L", "XL"];
+    let prev = 0;
+    for (const size of sizes) {
+      const price = unit({ ...newDesign(), size });
+      expect(price).toBeGreaterThan(prev);
+      prev = price;
+    }
+  });
+
+  it("charges for text, inclusions, and the rush window", () => {
+    const plain = newDesign();
+    const withText = { ...plain, text: "Aarav · 14.11.2026" };
+    expect(designQuote(withText).input.personalizationFee).toBe(60);
+    expect(unit(withText)).toBeGreaterThan(unit(plain));
+
+    const dense = { ...plain, inclusions: Array.from({ length: 6 }, (_, i) => ({ id: `i${i}`, kind: "petal" as const, x: 20 + i * 10, y: 40, rot: 0, scale: 1 })) };
+    expect(unit(dense)).toBeGreaterThan(unit({ ...plain, inclusions: [] }));
+
+    const rushed = { ...plain, rush: true };
+    expect(unit(rushed)).toBeGreaterThan(unit(plain));
+  });
+
+  it("scales the order total linearly with quantity", () => {
+    const one = designQuote({ ...newDesign(), quantity: 1 }).quote;
+    const three = designQuote({ ...newDesign(), quantity: 3 }).quote;
+    expect(three.orderTotal).toBe(one.roundedPrice * 3);
   });
 });

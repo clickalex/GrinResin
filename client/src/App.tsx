@@ -21,13 +21,36 @@ import Playbook from "./pages/chapters/Playbook";
 import Investor from "./pages/chapters/Investor";
 import DemosIndex from "./pages/demos/DemosIndex";
 import CatalogueDemo from "./pages/demos/CatalogueDemo";
-import ShopDemo from "./pages/demos/ShopDemo";
 import PricingDemo from "./pages/demos/PricingDemo";
 import OrderBuilderDemo from "./pages/demos/OrderBuilderDemo";
 import OrderTrackDemo from "./pages/demos/OrderTrackDemo";
+import Shop from "./pages/store/Shop";
+import ProductPage from "./pages/store/ProductPage";
+import DesignStudio from "./pages/store/DesignStudio";
+import CartPage from "./pages/store/CartPage";
+import CheckoutPage from "./pages/store/CheckoutPage";
+import OrderPage from "./pages/store/OrderPage";
+import MyOrders from "./pages/store/MyOrders";
+import MyDesigns from "./pages/store/MyDesigns";
+import About from "./pages/info/About";
+import Weddings from "./pages/info/Weddings";
+import Corporate from "./pages/info/Corporate";
+import Workshops from "./pages/info/Workshops";
+import Faq from "./pages/info/Faq";
+import Care from "./pages/info/Care";
+import Contact from "./pages/info/Contact";
+import { CartProvider } from "./lib/cart";
 
 // The document reader carries the markdown renderer (streamdown) — load it only when opened.
 const Documents = lazy(() => import("./pages/Documents"));
+
+// Param adapters for :id / :ref routes.
+function ProductRoute({ params }: { params: Record<string, string | undefined> }) {
+  return <ProductPage id={String(params.id ?? "")} />;
+}
+function OrderRoute({ params }: { params: Record<string, string | undefined> }) {
+  return <OrderPage ref={String(params.ref ?? "")} />;
+}
 
 function RouteFallback() {
   return (
@@ -59,10 +82,28 @@ function Router() {
 
         <Route path="/demos" component={DemosIndex} />
         <Route path="/demos/catalogue" component={CatalogueDemo} />
-        <Route path="/demos/shop" component={ShopDemo} />
         <Route path="/demos/pricing" component={PricingDemo} />
         <Route path="/demos/order" component={OrderBuilderDemo} />
         <Route path="/demos/track" component={OrderTrackDemo} />
+
+        {/* Store — shop, design-your-own, cart, checkout, orders */}
+        <Route path="/shop" component={Shop} />
+        <Route path="/product/:id" component={ProductRoute} />
+        <Route path="/studio" component={DesignStudio} />
+        <Route path="/designs" component={MyDesigns} />
+        <Route path="/cart" component={CartPage} />
+        <Route path="/checkout" component={CheckoutPage} />
+        <Route path="/orders" component={MyOrders} />
+        <Route path="/order/:ref" component={OrderRoute} />
+
+        {/* Info pages */}
+        <Route path="/about" component={About} />
+        <Route path="/weddings" component={Weddings} />
+        <Route path="/corporate" component={Corporate} />
+        <Route path="/workshops" component={Workshops} />
+        <Route path="/faq" component={Faq} />
+        <Route path="/care" component={Care} />
+        <Route path="/contact" component={Contact} />
 
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
@@ -78,7 +119,9 @@ function App() {
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <CartProvider>
+              <Router />
+          </CartProvider>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

@@ -43,7 +43,7 @@ export default function OrderTrackDemo() {
       className="demo-track"
       intro="Production & care · where my piece is right now"
       title={<>Every pour is<br /><em>a promise with a queue.</em></>}
-      next={{ href: "/demos/shop", label: "Place another demo order" }}
+      next={{ href: "/shop", label: "Place another order in the shop" }}
     >
       <div className="track-lookup reveal">
         <div className="demo-search">

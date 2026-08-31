@@ -43,6 +43,7 @@ export type Quote = {
   netContribution: number;
   contributionPercent: number;
   orderTotal: number;
+  orderContribution: number;
 };
 
 export const defaultQuoteInput: QuoteInput = {
@@ -133,7 +134,8 @@ export function computeQuote(input: QuoteInput): Quote {
     paymentFee: round2(paymentFee),
     netContribution: round2(netContribution),
     contributionPercent: roundedPrice > 0 ? round2((netContribution / roundedPrice) * 100) : 0,
-    orderTotal: round2(netContribution * quantity) ,
+    orderTotal: round2(roundedPrice * quantity),
+    orderContribution: round2(netContribution * quantity),
   };
 }
 
