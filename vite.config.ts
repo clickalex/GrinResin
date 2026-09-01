@@ -11,6 +11,7 @@ import { defineConfig } from "vite";
  * works offline, in dev, and from the static build served by server/index.ts.
  */
 export default defineConfig({
+  base: process.env.VITE_BASE || "/",
   plugins: [react(), tailwindcss(), jsxLocPlugin()],
   resolve: {
     alias: {
